@@ -6,7 +6,7 @@ import os
 import random
 
 # =========================================
-# הגדרת הבוט והרשאות
+# הגדרות בוט
 # =========================================
 intents = discord.Intents.default()
 intents.message_content = True
@@ -34,20 +34,20 @@ SPAM_PHRASES = [
 @bot.event
 async def on_ready():
 
-    print(f"✅ הבוט מחובר בתור: {bot.user}")
+    print(f"✅ מחובר בתור: {bot.user}")
 
     try:
 
         synced = await bot.tree.sync()
 
-        print(f"✅ סונכרנו {len(synced)} פקודות!")
+        print(f"✅ סונכרנו {len(synced)} פקודות")
 
     except Exception as e:
 
-        print(f"❌ שגיאה בסנכרון: {e}")
+        print(f"❌ שגיאה: {e}")
 
 # =========================================
-# פקודה 1 - Spam
+# SPAM
 # =========================================
 @app_commands.allowed_contexts(
     guilds=True,
@@ -67,19 +67,25 @@ async def spam(
     text: str
 ):
 
-    await interaction.response.send_message(
-        "🔥 מתחיל ספאם...",
+    await interaction.response.defer(
         ephemeral=True
     )
 
     for i in range(10):
 
-        await interaction.channel.send(text)
+        await interaction.channel.send(
+            text
+        )
 
         await asyncio.sleep(0.8)
 
+    await interaction.followup.send(
+        "✅ הספאם הסתיים",
+        ephemeral=True
+    )
+
 # =========================================
-# פקודה 2 - Mass Ping
+# MASSPING
 # =========================================
 @app_commands.allowed_contexts(
     guilds=True,
@@ -99,8 +105,7 @@ async def massping(
     target: discord.User
 ):
 
-    await interaction.response.send_message(
-        f"🔥 מתחיל לתייג את {target.mention}",
+    await interaction.response.defer(
         ephemeral=True
     )
 
@@ -112,8 +117,13 @@ async def massping(
 
         await asyncio.sleep(0.8)
 
+    await interaction.followup.send(
+        "✅ התיוג הסתיים",
+        ephemeral=True
+    )
+
 # =========================================
-# פקודה 3 - Raid
+# RAID
 # =========================================
 @app_commands.allowed_contexts(
     guilds=True,
@@ -126,12 +136,13 @@ async def massping(
 )
 @bot.tree.command(
     name="raid",
-    description="מספים לינק אוטומטי"
+    description="מספים לינק אוטומטית"
 )
-async def raid(interaction: discord.Interaction):
+async def raid(
+    interaction: discord.Interaction
+):
 
-    await interaction.response.send_message(
-        "🔥 מתחיל רייד!",
+    await interaction.response.defer(
         ephemeral=True
     )
 
@@ -143,8 +154,13 @@ async def raid(interaction: discord.Interaction):
 
         await asyncio.sleep(0.8)
 
+    await interaction.followup.send(
+        "✅ הרייד הסתיים",
+        ephemeral=True
+    )
+
 # =========================================
-# פקודה 4 - Ghost Ping
+# GHOSTPING
 # =========================================
 @app_commands.allowed_contexts(
     guilds=True,
@@ -157,7 +173,7 @@ async def raid(interaction: discord.Interaction):
 )
 @bot.tree.command(
     name="ghostping",
-    description="מתייג ומוחק מיד"
+    description="תיוג שנמחק מיד"
 )
 async def ghostping(
     interaction: discord.Interaction,
@@ -165,8 +181,7 @@ async def ghostping(
     amount: int = 5
 ):
 
-    await interaction.response.send_message(
-        "👻 מתחיל Ghost Ping",
+    await interaction.response.defer(
         ephemeral=True
     )
 
@@ -183,8 +198,13 @@ async def ghostping(
 
         await asyncio.sleep(0.5)
 
+    await interaction.followup.send(
+        "✅ ghostping הסתיים",
+        ephemeral=True
+    )
+
 # =========================================
-# פקודה 5 - Random Spam
+# RANDOMSPAM
 # =========================================
 @app_commands.allowed_contexts(
     guilds=True,
@@ -197,7 +217,7 @@ async def ghostping(
 )
 @bot.tree.command(
     name="randomspam",
-    description="משפטים רנדומליים"
+    description="ספאם רנדומלי"
 )
 async def randomspam(
     interaction: discord.Interaction,
@@ -205,8 +225,7 @@ async def randomspam(
     amount: int = 5
 ):
 
-    await interaction.response.send_message(
-        "🔥 מתחיל Random Spam",
+    await interaction.response.defer(
         ephemeral=True
     )
 
@@ -225,8 +244,13 @@ async def randomspam(
 
         await asyncio.sleep(0.8)
 
+    await interaction.followup.send(
+        "✅ randomspam הסתיים",
+        ephemeral=True
+    )
+
 # =========================================
-# פקודה 6 - Speed Spam
+# SPEEDSPAM
 # =========================================
 @app_commands.allowed_contexts(
     guilds=True,
@@ -239,7 +263,7 @@ async def randomspam(
 )
 @bot.tree.command(
     name="speedspam",
-    description="ספאם במהירות מטורפת"
+    description="ספאם במהירות"
 )
 async def speedspam(
     interaction: discord.Interaction,
@@ -247,8 +271,7 @@ async def speedspam(
     amount: int = 10
 ):
 
-    await interaction.response.send_message(
-        "⚡ מתחיל Speed Spam",
+    await interaction.response.defer(
         ephemeral=True
     )
 
@@ -257,10 +280,17 @@ async def speedspam(
 
     for i in range(amount):
 
-        await interaction.channel.send(text)
+        await interaction.channel.send(
+            text
+        )
+
+    await interaction.followup.send(
+        "✅ speedspam הסתיים",
+        ephemeral=True
+    )
 
 # =========================================
-# פקודה 7 - Mimic
+# MIMIC
 # =========================================
 @app_commands.allowed_contexts(
     guilds=True,
@@ -281,14 +311,16 @@ async def mimic(
 ):
 
     await interaction.response.send_message(
-        "✅ ההודעה נשלחה",
+        "✅ נשלח",
         ephemeral=True
     )
 
-    await interaction.channel.send(text)
+    await interaction.channel.send(
+        text
+    )
 
 # =========================================
-# פקודה 8 - Tutorial
+# TUTORIAL
 # =========================================
 @app_commands.allowed_contexts(
     guilds=True,
@@ -301,9 +333,11 @@ async def mimic(
 )
 @bot.tree.command(
     name="tutorial",
-    description="מציג את כל הפקודות"
+    description="מדריך הפקודות"
 )
-async def tutorial(interaction: discord.Interaction):
+async def tutorial(
+    interaction: discord.Interaction
+):
 
     embed = discord.Embed(
         title="📜 מדריך הפקודות",
@@ -312,37 +346,37 @@ async def tutorial(interaction: discord.Interaction):
 
     embed.add_field(
         name="/spam [טקסט]",
-        value="שולח הודעה 10 פעמים",
+        value="ספאם רגיל",
         inline=False
     )
 
     embed.add_field(
         name="/massping [משתמש]",
-        value="מתייג משתמש 10 פעמים",
+        value="תיוג 10 פעמים",
         inline=False
     )
 
     embed.add_field(
         name="/raid",
-        value="מספים לינק אוטומטית",
+        value="מספים לינק קבוע",
         inline=False
     )
 
     embed.add_field(
         name="/ghostping [משתמש]",
-        value="תיוג שנמחק מיד",
+        value="תיוג נעלם",
         inline=False
     )
 
     embed.add_field(
         name="/randomspam [משתמש]",
-        value="ספאם משפטים רנדומליים",
+        value="ספאם רנדומלי",
         inline=False
     )
 
     embed.add_field(
         name="/speedspam [טקסט]",
-        value="ספאם במהירות מטורפת",
+        value="ספאם מהיר",
         inline=False
     )
 
