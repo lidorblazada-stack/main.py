@@ -5,9 +5,9 @@ import asyncio
 import os
 import random
 
-# =========================
+# =========================================
 # הגדרת הבוט והרשאות
-# =========================
+# =========================================
 intents = discord.Intents.default()
 intents.message_content = True
 
@@ -16,9 +16,9 @@ bot = commands.Bot(
     intents=intents
 )
 
-# =========================
+# =========================================
 # משפטים רנדומליים
-# =========================
+# =========================================
 SPAM_PHRASES = [
     "נוווו ענה כברררר !!!",
     "איפה אתה יא נקניק כנס ללובי 😂",
@@ -28,27 +28,27 @@ SPAM_PHRASES = [
     "אתה פה או שאתה מפחד?"
 ]
 
-# =========================
+# =========================================
 # כשהבוט נדלק
-# =========================
+# =========================================
 @bot.event
 async def on_ready():
 
-    print(f'Spam Bot מוכן לפעולה בתור: {bot.user.name}')
+    print(f"✅ הבוט מחובר בתור: {bot.user}")
 
     try:
 
         synced = await bot.tree.sync()
 
-        print(f"סונכרנו {len(synced)} פקודות בהצלחה!")
+        print(f"✅ סונכרנו {len(synced)} פקודות!")
 
     except Exception as e:
 
-        print(f"שגיאה בסנכרון: {e}")
+        print(f"❌ שגיאה בסנכרון: {e}")
 
-# =========================
+# =========================================
 # פקודה 1 - Spam
-# =========================
+# =========================================
 @app_commands.allowed_contexts(
     guilds=True,
     dms=True,
@@ -60,7 +60,7 @@ async def on_ready():
 )
 @bot.tree.command(
     name="spam",
-    description="שולח את ההודעה שתבחר 10 פעמים ברצף"
+    description="שולח הודעה 10 פעמים"
 )
 async def spam(
     interaction: discord.Interaction,
@@ -68,7 +68,7 @@ async def spam(
 ):
 
     await interaction.response.send_message(
-        "מתחיל ספאם... חחח",
+        "🔥 מתחיל ספאם...",
         ephemeral=True
     )
 
@@ -78,9 +78,9 @@ async def spam(
 
         await asyncio.sleep(0.8)
 
-# =========================
+# =========================================
 # פקודה 2 - Mass Ping
-# =========================
+# =========================================
 @app_commands.allowed_contexts(
     guilds=True,
     dms=True,
@@ -92,7 +92,7 @@ async def spam(
 )
 @bot.tree.command(
     name="massping",
-    description="מתייג משתמש 10 פעמים ברצף"
+    description="מתייג משתמש 10 פעמים"
 )
 async def massping(
     interaction: discord.Interaction,
@@ -100,7 +100,7 @@ async def massping(
 ):
 
     await interaction.response.send_message(
-        f"מתחיל לתייג את {target.mention}...",
+        f"🔥 מתחיל לתייג את {target.mention}",
         ephemeral=True
     )
 
@@ -112,9 +112,9 @@ async def massping(
 
         await asyncio.sleep(0.8)
 
-# =========================
+# =========================================
 # פקודה 3 - Raid
-# =========================
+# =========================================
 @app_commands.allowed_contexts(
     guilds=True,
     dms=True,
@@ -126,12 +126,12 @@ async def massping(
 )
 @bot.tree.command(
     name="raid",
-    description="מציף את הערוץ אוטומטית"
+    description="מספים לינק אוטומטי"
 )
 async def raid(interaction: discord.Interaction):
 
     await interaction.response.send_message(
-        "מתחיל רייד!",
+        "🔥 מתחיל רייד!",
         ephemeral=True
     )
 
@@ -143,9 +143,9 @@ async def raid(interaction: discord.Interaction):
 
         await asyncio.sleep(0.8)
 
-# =========================
+# =========================================
 # פקודה 4 - Ghost Ping
-# =========================
+# =========================================
 @app_commands.allowed_contexts(
     guilds=True,
     dms=True,
@@ -157,7 +157,7 @@ async def raid(interaction: discord.Interaction):
 )
 @bot.tree.command(
     name="ghostping",
-    description="מתייג חבר ומוחק מיד"
+    description="מתייג ומוחק מיד"
 )
 async def ghostping(
     interaction: discord.Interaction,
@@ -166,7 +166,7 @@ async def ghostping(
 ):
 
     await interaction.response.send_message(
-        "מתחיל גוסט-פינג חשאי... 🤫",
+        "👻 מתחיל Ghost Ping",
         ephemeral=True
     )
 
@@ -183,9 +183,9 @@ async def ghostping(
 
         await asyncio.sleep(0.5)
 
-# =========================
+# =========================================
 # פקודה 5 - Random Spam
-# =========================
+# =========================================
 @app_commands.allowed_contexts(
     guilds=True,
     dms=True,
@@ -197,7 +197,7 @@ async def ghostping(
 )
 @bot.tree.command(
     name="randomspam",
-    description="מספים משפטים רנדומליים"
+    description="משפטים רנדומליים"
 )
 async def randomspam(
     interaction: discord.Interaction,
@@ -206,7 +206,7 @@ async def randomspam(
 ):
 
     await interaction.response.send_message(
-        f"מתחיל להציק ל-{target.mention}",
+        "🔥 מתחיל Random Spam",
         ephemeral=True
     )
 
@@ -225,9 +225,9 @@ async def randomspam(
 
         await asyncio.sleep(0.8)
 
-# =========================
+# =========================================
 # פקודה 6 - Speed Spam
-# =========================
+# =========================================
 @app_commands.allowed_contexts(
     guilds=True,
     dms=True,
@@ -239,7 +239,7 @@ async def randomspam(
 )
 @bot.tree.command(
     name="speedspam",
-    description="מפציץ טקסט במהירות"
+    description="ספאם במהירות מטורפת"
 )
 async def speedspam(
     interaction: discord.Interaction,
@@ -248,7 +248,7 @@ async def speedspam(
 ):
 
     await interaction.response.send_message(
-        "משגר ספאם מהיר!! 🔥🔥🔥",
+        "⚡ מתחיל Speed Spam",
         ephemeral=True
     )
 
@@ -259,9 +259,9 @@ async def speedspam(
 
         await interaction.channel.send(text)
 
-# =========================
+# =========================================
 # פקודה 7 - Mimic
-# =========================
+# =========================================
 @app_commands.allowed_contexts(
     guilds=True,
     dms=True,
@@ -281,15 +281,15 @@ async def mimic(
 ):
 
     await interaction.response.send_message(
-        "ההודעה נשלחה בהצלחה!",
+        "✅ ההודעה נשלחה",
         ephemeral=True
     )
 
     await interaction.channel.send(text)
 
-# =========================
+# =========================================
 # פקודה 8 - Tutorial
-# =========================
+# =========================================
 @app_commands.allowed_contexts(
     guilds=True,
     dms=True,
@@ -306,7 +306,7 @@ async def mimic(
 async def tutorial(interaction: discord.Interaction):
 
     embed = discord.Embed(
-        title="📜 מדריך הפקודות המלא של הבוט",
+        title="📜 מדריך הפקודות",
         color=discord.Color.red()
     )
 
@@ -324,7 +324,7 @@ async def tutorial(interaction: discord.Interaction):
 
     embed.add_field(
         name="/raid",
-        value="מספים לינק קבוע אוטומטית",
+        value="מספים לינק אוטומטית",
         inline=False
     )
 
@@ -336,7 +336,7 @@ async def tutorial(interaction: discord.Interaction):
 
     embed.add_field(
         name="/randomspam [משתמש]",
-        value="משפטים רנדומליים",
+        value="ספאם משפטים רנדומליים",
         inline=False
     )
 
@@ -357,9 +357,9 @@ async def tutorial(interaction: discord.Interaction):
         ephemeral=True
     )
 
-# =========================
-# מאפשר עבודה ב-DM
-# =========================
+# =========================================
+# מאפשר עבודה בכל מקום
+# =========================================
 ALL_COMMANDS = [
     spam,
     massping,
@@ -376,9 +376,9 @@ for command in ALL_COMMANDS:
     command._all_contexts = True
     command._user_install = True
 
-# =========================
-# הרצה דרך Railway
-# =========================
-token = os.getenv('BOT_TOKEN')
+# =========================================
+# הרצת הבוט
+# =========================================
+token = os.getenv("BOT_TOKEN")
 
 bot.run(token)
