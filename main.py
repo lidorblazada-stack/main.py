@@ -20,8 +20,6 @@ async def on_ready():
 
 # --- פקודה 1: ספאם ---
 @bot.tree.command(name="spam", description="שולח את ההודעה שתבחר 10 פעמים ברצף")
-@app_commands.allowed_contexts(guilds=True, dms_to_user=True, private_channels=True)
-@app_commands.allowed_installs(guilds=True, users=True)
 async def spam(interaction: discord.Interaction, text: str):
     await interaction.response.send_message("מתחיל ספאם... חחח", ephemeral=True)
     for i in range(10):
@@ -30,8 +28,6 @@ async def spam(interaction: discord.Interaction, text: str):
 
 # --- פקודה 2: תיוג המוני של משתמש ---
 @bot.tree.command(name="massping", description="מתייג משתמש 10 פעמים ברצף כדי לשגע אותו")
-@app_commands.allowed_contexts(guilds=True, dms_to_user=True, private_channels=True)
-@app_commands.allowed_installs(guilds=True, users=True)
 async def massping(interaction: discord.Interaction, target: discord.User):
     await interaction.response.send_message(f"מתחיל לתייג את {target.mention}...", ephemeral=True)
     for i in range(10):
@@ -40,8 +36,6 @@ async def massping(interaction: discord.Interaction, target: discord.User):
 
 # --- פקודה 3: רייד (תיוג @everyone) ---
 @bot.tree.command(name="raid", description="מציף את הערוץ בתיוגים של כולם")
-@app_commands.allowed_contexts(guilds=True, dms_to_user=True, private_channels=True)
-@app_commands.allowed_installs(guilds=True, users=True)
 async def raid(interaction: discord.Interaction, text: str):
     await interaction.response.send_message("מתחיל רייד מטורף!", ephemeral=True)
     for i in range(10):
@@ -50,8 +44,6 @@ async def raid(interaction: discord.Interaction, text: str):
 
 # --- פקודה 4: מדריך לפקודות ---
 @bot.tree.command(name="tutorial", description="מציג הסבר על כל פקודות הבוט")
-@app_commands.allowed_contexts(guilds=True, dms_to_user=True, private_channels=True)
-@app_commands.allowed_installs(guilds=True, users=True)
 async def tutorial(interaction: discord.Interaction):
     embed = discord.Embed(title="📜 מדריך הפקודות של הבוט", color=discord.Color.red())
     embed.add_field(name="/spam [טקסט]", value="שולח הודעה 10 פעמים ברצף", inline=False)
