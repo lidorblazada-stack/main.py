@@ -34,9 +34,9 @@ async def ping_user(interaction: discord.Interaction, target: discord.User, amou
         await interaction.channel.send(f"נוווו ענה כברררר {target.mention} !!!")
         await asyncio.sleep(1)
 
-# הגדרת הגמישות של הפקודה לעבוד בכל מקום אחרי עדכון הגרסה
+# הגדרת הגמישות של הפקודה לעבוד בכל מקום בצורה שדיסקורד דורשת
 ping_user.contexts = [discord.AppCommandContext.guild, discord.AppCommandContext.dm_channel, discord.AppCommandContext.private_channel]
-ping_user.integration_types = [discord.SelectDefault.guild, discord.SelectDefault.user]
+ping_user.integration_types = [discord.SelectDefaultValue.guild, discord.SelectDefaultValue.user]
 
 # הרצה של הבוט דרך הטוקן שישב ב-Railway
 token = os.getenv('BOT_TOKEN')
