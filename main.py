@@ -19,7 +19,7 @@ async def on_ready():
     except Exception as e:
         print(f"שגיאה בסנכרון פקודות: {e}")
 
-# הפקודה שתשגע את המשתמשים בשרתים ובפרטי
+# הפקודה שתשגע את המשתמשים
 @bot.tree.command(name="ping-user", description="לתייג חבר שלא עונה כדי להציק לו חחח")
 async def ping_user(interaction: discord.Interaction, target: discord.User, amount: int):
     # הגבלת כמות ל-10 כדי שלא יחסמו את הבוט על ספאם
@@ -33,13 +33,6 @@ async def ping_user(interaction: discord.Interaction, target: discord.User, amou
     for i in range(amount):
         await interaction.channel.send(f"נוווו ענה כברררר {target.mention} !!!")
         await asyncio.sleep(1)
-
-# הגדרת הגמישות של הפקודה לעבוד בכל מקום בצורה עוקפת שגיאות גרסה
-# 0 = Guild (שרת), 1 = Bot DM (פרטי עם הבוט), 2 = Private Channels (צ'אטים פרטיים וקבוצות)
-ping_user.contexts = [discord.AppCommandContext(0), discord.AppCommandContext(1), discord.AppCommandContext(2)]
-
-# 0 = Guild Install (התקנה בשרתים), 1 = User Install (התקנה על המשתמש לפרטי)
-ping_user.integration_types = [discord.IntegrationType(0), discord.IntegrationType(1)]
 
 # הרצה של הבוט דרך הטוקן שישב ב-Railway
 token = os.getenv('BOT_TOKEN')
