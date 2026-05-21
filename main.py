@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 import asyncio
 import os
 
@@ -18,9 +19,8 @@ async def on_ready():
     except Exception as e:
         print(f"שגיאה בסנכרון פקודות: {e}")
 
-# הפקודה המעודכנת שעובדת גם בפרטי!
+# הפקודה שתשגע את המשתמשים בשרתים ובפרטי
 @bot.tree.command(name="ping-user", description="לתייג חבר שלא עונה כדי להציק לו חחח")
-@discord.app_commands.contexts(guild=True, dm_channel=True, private_channel=True)
 async def ping_user(interaction: discord.Interaction, target: discord.User, amount: int):
     # הגבלת כמות ל-10 כדי שלא יחסמו את הבוט על ספאם
     if amount > 10:
@@ -31,5 +31,14 @@ async def ping_user(interaction: discord.Interaction, target: discord.User, amou
     await interaction.response.send_message(f"מתחיל לתייג את {target.mention} כ-{amount} פעמים... חחח", ephemeral=True)
     
     for i in range(amount):
+        # שליחת ההודעה ישירות לערוץ או לצ'אט הנוכחי שבו הפקודה הופעלה
         await interaction.channel.send(f"נוווו ענה כברררר {target.mention} !!!")
         await asyncio.sleep(1)
+
+# הגדרת הגמישות של הפקודה לעבוד בכל מקום (שרתים, פרטי, וקבוצות) ישירות על האובייקט
+ping_user.contexts = [discord.AppCommandContext.guild, discord.AppCommandContext.dm_channel, discord.AppCommandContext.private_channel]
+ping_user.integration_types = [discord.IntegrationType.guild_install, discord.IntegrationType.user_install]
+
+# הרצה של הבוט דרך הטוקן שישב ב-Railway
+token = os.getenv('BOT_TOKEN')
+bot.run(token)
