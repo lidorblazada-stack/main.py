@@ -18,7 +18,7 @@ async def on_ready():
     except Exception as e:
         print(f"שגיאה בסנכרון: {e}")
 
-# --- פקודה 1: ספאם ---
+# --- פקודה 1: ספאם של טקסט רגיל ---
 @bot.tree.command(name="spam", description="שולח את ההודעה שתבחר 10 פעמים ברצף")
 async def spam(interaction: discord.Interaction, text: str):
     await interaction.response.send_message("מתחיל ספאם... חחח", ephemeral=True)
@@ -26,7 +26,7 @@ async def spam(interaction: discord.Interaction, text: str):
         await interaction.channel.send(text)
         await asyncio.sleep(0.8)
 
-# --- פקודה 2: תיוג המוני של משתמש ---
+# --- פקודה 2: תיוג משתמש ספציפי ---
 @bot.tree.command(name="massping", description="מתייג משתמש 10 פעמים ברצף כדי לשגע אותו")
 async def massping(interaction: discord.Interaction, target: discord.User):
     await interaction.response.send_message(f"מתחיל לתייג את {target.mention}...", ephemeral=True)
@@ -34,12 +34,12 @@ async def massping(interaction: discord.Interaction, target: discord.User):
         await interaction.channel.send(f"{target.mention} נוווו ענה כברררר!!!")
         await asyncio.sleep(0.8)
 
-# --- פקודה 3: רייד (תיוג @everyone) ---
-@bot.tree.command(name="raid", description="מציף את הערוץ בתיוגים של כולם")
-async def raid(interaction: discord.Interaction, text: str):
-    await interaction.response.send_message("מתחיל רייד מטורף!", ephemeral=True)
+# --- פקודה 3: רייד חופשי (מה שבאלך!) ---
+@bot.tree.command(name="raid", description="מציף את הערוץ במה שתבחר (טקסט, תיוג, תפקיד וכו')")
+async def raid(interaction: discord.Interaction, target: str):
+    await interaction.response.send_message(f"מתחיל רייד על: {target}!", ephemeral=True)
     for i in range(10):
-        await interaction.channel.send(f"@everyone {text} 🔥🔥🔥")
+        await interaction.channel.send(f"{target} 🔥🔥🔥")
         await asyncio.sleep(0.8)
 
 # --- פקודה 4: מדריך לפקודות ---
@@ -48,7 +48,7 @@ async def tutorial(interaction: discord.Interaction):
     embed = discord.Embed(title="📜 מדריך הפקודות של הבוט", color=discord.Color.red())
     embed.add_field(name="/spam [טקסט]", value="שולח הודעה 10 פעמים ברצף", inline=False)
     embed.add_field(name="/massping [משתמש]", value="מתייג מישהו 10 פעמים ברצף", inline=False)
-    embed.add_field(name="/raid [טקסט]", value="מתייג את כולם (@everyone) עם הטקסט 10 פעמים", inline=False)
+    embed.add_field(name="/raid [מה שבאלך]", value="מספים את מה שרשמת (טקסט או תיוג) 10 פעמים ברצף", inline=False)
     await interaction.response.send_message(embed=embed, ephemeral=True)
 
 # הרצה דרך Railway
