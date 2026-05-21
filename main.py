@@ -18,14 +18,9 @@ async def on_ready():
     except Exception as e:
         print(f"שגיאה בסנכרון פקודות: {e}")
 
-# הפקודה שתשגע את המשתמשים
+# הפקודה המעודכנת שעובדת גם בפרטי!
 @bot.tree.command(name="ping-user", description="לתייג חבר שלא עונה כדי להציק לו חחח")
-async def ping_user(interaction: discord.Interaction, target: discord.User, amount: int):
-    # הגבלת כמות ל-10 כדי שלא יחסמו את הבוט על ספאם
-    if amount > 10:
-   # הפקודה המעודכנת שעובדת גם בפרטי!
-@bot.tree.command(name="ping-user", description="לתייג חבר שלא עונה כדי להציק לו חחח")
-@discord.app_commands.contexts(guild=True, dm_channel=True, private_channel=True) # מאפשר להריץ בכל מקום
+@discord.app_commands.contexts(guild=True, dm_channel=True, private_channel=True)
 async def ping_user(interaction: discord.Interaction, target: discord.User, amount: int):
     # הגבלת כמות ל-10 כדי שלא יחסמו את הבוט על ספאם
     if amount > 10:
@@ -36,16 +31,5 @@ async def ping_user(interaction: discord.Interaction, target: discord.User, amou
     await interaction.response.send_message(f"מתחיל לתייג את {target.mention} כ-{amount} פעמים... חחח", ephemeral=True)
     
     for i in range(amount):
-        # אם אנחנו בפרטי, זה ישלח הודעה ישירות לצ'אט הנוכחי
         await interaction.channel.send(f"נוווו ענה כברררר {target.mention} !!!")
         await asyncio.sleep(1)
-        
-    await interaction.response.send_message(f"מתחיל לתייג את {target.mention} כ-{amount} פעמים... חחח", ephemeral=True)
-    
-    for i in range(amount):
-        await interaction.channel.send(f"נוווו ענה כברררר {target.mention} !!!")
-        await asyncio.sleep(1)
-
-# הרצה של הבוט דרך הטוקן שישב ב-Railway
-token = os.getenv('BOT_TOKEN')
-bot.run(token)
